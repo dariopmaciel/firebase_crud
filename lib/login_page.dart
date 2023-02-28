@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text('LOGIN PAGE'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: ListView(
           children: [
             TextFormField(
