@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
     User? usuario = await _firebaseAuth.currentUser;
     if (usuario != null) {
       setState(() {
+        //print(usuario);
         nome = usuario.displayName!;
         email = usuario.email!;
       });
