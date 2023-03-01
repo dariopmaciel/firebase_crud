@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crud/cadastrar_page.dart';
 
@@ -57,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 login();
               },
-              child: const Text("Login"),
+              child: const Text("LOGIN"),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -69,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 );
               },
-              child: Text("CRIAR CONTA"),
+              child: const Text("CRIAR CONTA"),
             ),
           ],
         ),

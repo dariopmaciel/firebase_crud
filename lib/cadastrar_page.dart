@@ -1,10 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crud/checagem_page.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
-class CadastrarPage extends StatelessWidget {
+class CadastrarPage extends StatefulWidget {
   CadastrarPage({super.key});
 
+  @override
+  State<CadastrarPage> createState() => _CadastrarPageState();
+}
+
+class _CadastrarPageState extends State<CadastrarPage> {
   final _nameEC = TextEditingController();
   final _emailEC = TextEditingController();
   final _pwdEC = TextEditingController();
@@ -15,7 +21,7 @@ class CadastrarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CADASTRAR PAGE'),
+        title: const Text('CADASTRO PAGE'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -63,7 +69,14 @@ class CadastrarPage extends StatelessWidget {
               ]),
             ),
             const SizedBox(height: 30),
-            ElevatedButton(onPressed: () {}, child: Text("CADASTRAR"))
+            ElevatedButton(
+                onPressed: () {
+                  final valid = _formKey.currentState?.validate() ?? false;
+                  if (valid) {
+                    cadastrar();
+                  }
+                },
+                child: const Text("CADASTRAR"))
           ]),
         ),
       ),
@@ -71,6 +84,23 @@ class CadastrarPage extends StatelessWidget {
   }
 
   cadastrar() async {
-    //
+    _firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: _emailEC.text, password: _pwdEC.text)
+        .then(
+      (UserCredential userCredential) {
+        userCredential.user!.updateDisplayName(_nameEC.text);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ChecagemPage(),
+            ),
+            (route) => false);
+      },
+    ).catchError(
+      (FirebaseAuthException firebaseAuthException) {
+        //
+      },
+    );
   }
 }
