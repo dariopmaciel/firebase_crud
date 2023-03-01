@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('LOGIN PAGE'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => CadastrarPage(),
@@ -88,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         password: _pwdEC.text,
       );
       if (userCredential != null) {
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

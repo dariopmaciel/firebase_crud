@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crud/checagem_page.dart';
 import 'package:firebase_crud/firebase_options.dart';
-import 'package:firebase_crud/home_page.dart';
+
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: true,
+      //  debugShowCheckedModeBanner: true,
       theme: ThemeData(
-        useMaterial3: true,
         primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
       home: const ChecagemPage(),
     );

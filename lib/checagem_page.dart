@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crud/home_page.dart';
@@ -22,7 +23,7 @@ class _ChecagemPageState extends State<ChecagemPage> {
     streamSubscription = FirebaseAuth.instance.authStateChanges().listen(
       (User? user) {
         if (user == null) {
-          print('Você não tem usuário Logado!');
+          //print('VOCÊ NÃO ESTÁ LOGADO');
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -36,7 +37,7 @@ class _ChecagemPageState extends State<ChecagemPage> {
               builder: (context) => const HomePage(),
             ),
           );
-          print('Usuário Logado!');
+          //print('VOCÊ ESTÁ LOGADO');
         }
       },
     );

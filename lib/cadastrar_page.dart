@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
 class CadastrarPage extends StatefulWidget {
-  CadastrarPage({super.key});
+  const CadastrarPage({super.key});
 
   @override
   State<CadastrarPage> createState() => _CadastrarPageState();
@@ -17,11 +17,13 @@ class _CadastrarPageState extends State<CadastrarPage> {
   final _firebaseAuth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CADASTRO PAGE'),
+        title: Text('CADASTRO PAGE'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -36,7 +38,7 @@ class _CadastrarPageState extends State<CadastrarPage> {
               ),
               validator: Validatorless.multiple([
                 Validatorless.required("*Obrigatório"),
-                Validatorless.min(5, "Minimo 5 caracteres")
+                Validatorless.min(3, "Minimo 3 caracteres")
               ]),
             ),
             TextFormField(
@@ -55,7 +57,7 @@ class _CadastrarPageState extends State<CadastrarPage> {
               ),
               validator: Validatorless.multiple([
                 Validatorless.required("Senha Obrigatória"),
-                Validatorless.min(6, "Minimo 6 caracteres")
+                Validatorless.min(3, "Minimo 3 caracteres")
               ]),
             ),
             TextFormField(
@@ -83,12 +85,13 @@ class _CadastrarPageState extends State<CadastrarPage> {
     );
   }
 
-  cadastrar() async {
-    _firebaseAuth
-        .createUserWithEmailAndPassword(
-            email: _emailEC.text, password: _pwdEC.text)
-        .then(
-      (UserCredential userCredential) {
+  Future cadastrar() async {
+    try {
+      UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+              email: _emailEC.text, password: _pwdEC.text);
+      if (userCredential != null) {
+        //
         userCredential.user!.updateDisplayName(_nameEC.text);
         Navigator.pushAndRemoveUntil(
             context,
@@ -96,11 +99,45 @@ class _CadastrarPageState extends State<CadastrarPage> {
               builder: (context) => const ChecagemPage(),
             ),
             (route) => false);
-      },
-    ).catchError(
-      (FirebaseAuthException firebaseAuthException) {
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "week-password") {
         //
-      },
-    );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("CRIE UMA SENHA MAIS FORTE"),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      } else if (e.code == "email-already-in-use") {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("E-MAIL JÁ CADASTRADO"),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    }
   }
+
+  // cadastrar() async {
+  //   _firebaseAuth
+  //       .createUserWithEmailAndPassword(
+  //           email: _emailEC.text, password: _pwdEC.text)
+  //       .then(
+  //     (UserCredential userCredential) {
+  //       userCredential.user!.updateDisplayName(_nameEC.text);
+  //       Navigator.pushAndRemoveUntil(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (context) => const ChecagemPage(),
+  //           ),
+  //           (route) => false);
+  //     },
+  //   ).catchError(
+  //     (FirebaseAuthException firebaseAuthException) {
+  //       //
+  //     },
+  //   );
+  // }
 }

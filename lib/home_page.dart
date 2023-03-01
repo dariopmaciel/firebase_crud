@@ -12,29 +12,72 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _firebaseAuth = FirebaseAuth.instance;
 
+  String nome = "";
+  String email = "";
+
+  @override
+  void initState() {
+    pegarUsuario();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('HOME PAGE'),
+        centerTitle: true,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text("Usuário: $nome"),
+              accountEmail: Text("E-mail: $email"),
+            ),
+            ListTile(
+              dense: true,
+              title: const Text("SAIR"),
+              trailing: const Icon(Icons.exit_to_app),
+              onTap: () {
+                sair();
+              },
+            ),
+          ],
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            "Home Page",
+          Text(
+            nome,
             textAlign: TextAlign.center,
           ),
-          ElevatedButton(
-            onPressed: () {
-              sair();
-            },
-            child: const Text("SAIR"),
-          ),
+          // const Text(
+          //   "imprimir usuario",
+          //   textAlign: TextAlign.center,
+          // ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     pegarUsuario();
+          //   },
+          //   child: const Text("usuario"),
+          // ),
         ],
       ),
     );
+  }
+
+  pegarUsuario() async {
+    User? usuario = await _firebaseAuth.currentUser;
+    if (usuario != null) {
+      setState(() {
+        nome = usuario.displayName!;
+        email = usuario.email!;
+      });
+      //print(usuario);
+    }
   }
 
   sair() async {
