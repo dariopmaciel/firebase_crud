@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crud/checagem_page.dart';
+import 'package:firebase_crud/page/validator_page.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -16,7 +16,6 @@ class _CadastrarPageState extends State<CadastrarPage> {
   final _pwdEC = TextEditingController();
   final _firebaseAuth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +95,7 @@ class _CadastrarPageState extends State<CadastrarPage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const ChecagemPage(),
+              builder: (context) => const Validator(),
             ),
             (route) => false);
       }

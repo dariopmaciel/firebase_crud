@@ -1,9 +1,9 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crud/cadastrar_page.dart';
+import 'package:firebase_crud/page/register/cadastrar_page.dart';
 
-import 'package:firebase_crud/home_page.dart';
+import 'package:firebase_crud/page/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

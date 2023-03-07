@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crud/checagem_page.dart';
+import 'package:firebase_crud/page/splash_page/splash_page.dart';
+import 'package:firebase_crud/page/validator_page.dart';
 import 'package:firebase_crud/firebase_options.dart';
 
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const ChecagemPage(),
+      home: const SplashPage(),
     );
   }
 }

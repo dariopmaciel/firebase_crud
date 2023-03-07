@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crud/checagem_page.dart';
+import 'package:firebase_crud/page/validator_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           (user) => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const ChecagemPage(),
+              builder: (context) => const Validator(),
             ),
           ),
         );

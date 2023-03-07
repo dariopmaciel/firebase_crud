@@ -2,18 +2,18 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crud/home_page.dart';
-import 'package:firebase_crud/login_page.dart';
+import 'package:firebase_crud/page/home/home_page.dart';
+import 'package:firebase_crud/page/auth/login_page.dart';
 import 'package:flutter/material.dart';
 
-class ChecagemPage extends StatefulWidget {
-  const ChecagemPage({super.key});
+class Validator extends StatefulWidget {
+  const Validator({super.key});
 
   @override
-  State<ChecagemPage> createState() => _ChecagemPageState();
+  State<Validator> createState() => _ValidatorState();
 }
 
-class _ChecagemPageState extends State<ChecagemPage> {
+class _ValidatorState extends State<Validator> {
   StreamSubscription? streamSubscription;
 
   @override
