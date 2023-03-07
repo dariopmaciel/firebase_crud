@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crud/page/login/login_page.dart';
 import 'package:firebase_crud/page/splash_page/splash_page.dart';
 import 'package:firebase_crud/page/validator_page.dart';
 import 'package:firebase_crud/firebase_options.dart';
@@ -19,12 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      //  debugShowCheckedModeBanner: true,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        useMaterial3: true,
+        //useMaterial3: true,
       ),
-      home: const SplashPage(),
+      home:  LoginPage(),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crud/page/home/home_page.dart';
-import 'package:firebase_crud/page/auth/login_page.dart';
+import 'package:firebase_crud/page/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class Validator extends StatefulWidget {
